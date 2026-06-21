@@ -501,6 +501,11 @@ body.dark {
   --shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
+/* スマホ(タッチ端末): 下部の利益パネルを固定せず通常配置にして読みやすく */
+@media (pointer: coarse) {
+  body { padding-bottom: 24px !important; }
+  .result-panel { position: static !important; box-shadow: none; }
+}
 </style>
 </head>
 <body>
@@ -592,6 +597,10 @@ body.dark {
   <div class="field">
     <label>バイヤー送料（上と同じ通貨）</label>
     <input type="text" inputmode="decimal" id="buyerShipping" placeholder="例: 20" value="0">
+  </div>
+  <div class="field">
+    <label>eBay広告料率 (%)・Promoted Listings</label>
+    <input type="text" inputmode="decimal" id="adRate" placeholder="例: 2.1" value="2.1">
   </div>
   <div class="field">
     <label>為替レート（USD → JPY）</label>
@@ -784,6 +793,7 @@ body.dark {
     <div class="detail-row"><span class="label">eBay最終価値手数料(FVF)</span><span class="value" id="dFvf">---</span></div>
     <div class="detail-row"><span class="label">Per-order手数料</span><span class="value" id="dPerOrder">---</span></div>
     <div class="detail-row"><span class="label">国際販売手数料</span><span class="value" id="dIntl">---</span></div>
+    <div class="detail-row"><span class="label">eBay広告料(Promoted Listings)</span><span class="value" id="dAdFee">---</span></div>
     <div class="detail-row"><span class="label">eBay手数料 消費税(10%)</span><span class="value" id="dEbayTax">---</span></div>
     <div class="detail-row"><span class="label">Payoneer手数料（円転2%）</span><span class="value" id="dPayoneer">---</span></div>
     <div class="detail-row"><span class="label">送料</span><span class="value" id="dShipping">---</span></div>

@@ -76,9 +76,10 @@ function computeProfit(input) {
     baseTariffRate,
     additionalTariffRate,
     shippingCostJPY = 0,
-    extraFeeJPY = 0
+    extraFeeJPY = 0,
+    adRatePct = 0
   } = input;
-  const required = { exchangeRate, itemPrice, buyerShipping, costPrice, fvfRate, baseTariffRate, additionalTariffRate, shippingCostJPY, extraFeeJPY };
+  const required = { exchangeRate, itemPrice, buyerShipping, costPrice, fvfRate, baseTariffRate, additionalTariffRate, shippingCostJPY, extraFeeJPY, adRatePct };
   for (const [k, v] of Object.entries(required)) {
     if (typeof v !== "number" || !Number.isFinite(v)) throw new Error(`computeProfit: ${k} must be a finite number, got ${v}`);
   }
@@ -89,7 +90,8 @@ function computeProfit(input) {
   const fvfFee = totalSaleUSD * (fvfRate / 100);
   const perOrderFee = totalSaleUSD <= 10 ? 0.3 : 0.4;
   const intlFee = totalSaleUSD * 0.0135;
-  const ebayFeesUSD = fvfFee + perOrderFee + intlFee;
+  const adFee = totalSaleUSD * (adRatePct / 100);
+  const ebayFeesUSD = fvfFee + perOrderFee + intlFee + adFee;
   const ebayFeesJPY = ebayFeesUSD * exchangeRate;
   const ebayFeeTaxJPY = ebayFeesJPY * 0.1;
   const payoneerFeeJPY = Math.max(0, totalSaleUSD - ebayFeesUSD) * 0.02 * exchangeRate;
@@ -117,6 +119,7 @@ function computeProfit(input) {
       fvfJPY: fvfFee * exchangeRate,
       perOrderJPY: perOrderFee * exchangeRate,
       intlJPY: intlFee * exchangeRate,
+      adFeeJPY: adFee * exchangeRate,
       ebayFeeTaxJPY,
       payoneerFeeJPY,
       shippingCostJPY,
@@ -372,7 +375,7 @@ var num = (id) => {
   const el = $(id);
   return el ? parseNum(el.value) : 0;
 };
-var APP_VERSION = true ? "v0.3.0" : "dev";
+var APP_VERSION = true ? "v0.4.0" : "dev";
 var currency = "USD";
 var translatedText = "";
 var modelLocked = false;
@@ -474,7 +477,8 @@ function buildInput(categoryId, base, additional, shippingCostJPY) {
     baseTariffRate: base,
     additionalTariffRate: additional,
     shippingCostJPY,
-    extraFeeJPY: num("extraFee")
+    extraFeeJPY: num("extraFee"),
+    adRatePct: num("adRate")
   };
 }
 function setCeilCell(id, val) {
@@ -551,6 +555,7 @@ function renderProfit(r, costPrice) {
   $("dFvf").textContent = fmtYen(b.fvfJPY);
   $("dPerOrder").textContent = fmtYen(b.perOrderJPY);
   $("dIntl").textContent = fmtYen(b.intlJPY);
+  $("dAdFee").textContent = fmtYen(b.adFeeJPY);
   $("dEbayTax").textContent = fmtYen(b.ebayFeeTaxJPY);
   $("dPayoneer").textContent = fmtYen(b.payoneerFeeJPY);
   $("dShipping").textContent = fmtYen(b.shippingCostJPY);
@@ -851,6 +856,7 @@ function wire() {
     "domesticShipping",
     "shippingManual",
     "extraFee",
+    "adRate",
     "sizeL",
     "sizeW",
     "sizeH",

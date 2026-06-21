@@ -372,7 +372,7 @@ var num = (id) => {
   const el = $(id);
   return el ? parseNum(el.value) : 0;
 };
-var APP_VERSION = true ? "v0.2.0" : "dev";
+var APP_VERSION = true ? "v0.3.0" : "dev";
 var currency = "USD";
 var translatedText = "";
 var modelLocked = false;
@@ -408,6 +408,7 @@ function buildCategorySelect() {
     opt.textContent = c.name;
     sel.appendChild(opt);
   }
+  sel.value = "cameras";
 }
 function currentBillingWeight() {
   const l = num("sizeL"), w = num("sizeW"), h = num("sizeH"), actualKg = num("actualWeight");
@@ -876,6 +877,7 @@ function wire() {
     $("sizeH").value = btn60.dataset.h;
   }
   if (!$("actualWeight").value) $("actualWeight").value = "0.5";
+  if (!num("buyerShipping")) $("buyerShipping").value = "20";
   ensureRate();
   fetchExchangeRate();
   calculate();

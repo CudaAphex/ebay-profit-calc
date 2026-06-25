@@ -375,7 +375,7 @@ var num = (id) => {
   const el = $(id);
   return el ? parseNum(el.value) : 0;
 };
-var APP_VERSION = true ? "v0.4.0" : "dev";
+var APP_VERSION = true ? "v0.5.0" : "dev";
 var currency = "USD";
 var translatedText = "";
 var modelLocked = false;

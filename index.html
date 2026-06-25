@@ -613,6 +613,32 @@ body.dark {
   </div>
 </div>
 
+<!-- ===== 仕入れ (ヤフオク等) ===== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon supply">🛒</div>
+    <div class="section-title">仕入れ（ヤフオク等）</div>
+  </div>
+  <div class="field">
+    <label>現在価格（円・入札判定に使用）</label>
+    <div class="row">
+      <div class="field" style="flex:2">
+        <input type="text" inputmode="decimal" id="currentPrice" placeholder="例: 4500">
+      </div>
+      <button class="btn-inline" id="yahooLowestBtn">最安値取得</button>
+    </div>
+    <div class="note" id="yahooNote" style="display:none"></div>
+  </div>
+  <div class="field">
+    <label>国内送料（円）</label>
+    <input type="text" inputmode="decimal" id="domesticShipping" placeholder="例: 800" value="0">
+  </div>
+  <div class="field">
+    <label>仕入れ価格（円・任意。利益計算に使用）</label>
+    <input type="text" inputmode="decimal" id="costPrice" placeholder="落札額が決まったら入力">
+  </div>
+</div>
+
 <!-- ===== 商品 / 型番 ===== -->
 <div class="section">
   <div class="section-header">
@@ -669,32 +695,6 @@ body.dark {
     <span class="value" id="tariffTotalValue" style="font-size:16px">---</span>
   </div>
   <p class="note" id="tariffNote">※関税率は目安です。DDP（セラー負担）で計算されます。</p>
-</div>
-
-<!-- ===== 仕入れ (ヤフオク等) ===== -->
-<div class="section">
-  <div class="section-header">
-    <div class="section-icon supply">🛒</div>
-    <div class="section-title">仕入れ（ヤフオク等）</div>
-  </div>
-  <div class="field">
-    <label>現在価格（円・入札判定に使用）</label>
-    <div class="row">
-      <div class="field" style="flex:2">
-        <input type="text" inputmode="decimal" id="currentPrice" placeholder="例: 4500">
-      </div>
-      <button class="btn-inline" id="yahooLowestBtn">最安値取得</button>
-    </div>
-    <div class="note" id="yahooNote" style="display:none"></div>
-  </div>
-  <div class="field">
-    <label>国内送料（円）</label>
-    <input type="text" inputmode="decimal" id="domesticShipping" placeholder="例: 800" value="0">
-  </div>
-  <div class="field">
-    <label>仕入れ価格（円・任意。利益計算に使用）</label>
-    <input type="text" inputmode="decimal" id="costPrice" placeholder="落札額が決まったら入力">
-  </div>
 </div>
 
 <!-- ===== サイズ・重量 ===== -->

@@ -375,7 +375,7 @@ var num = (id) => {
   const el = $(id);
   return el ? parseNum(el.value) : 0;
 };
-var APP_VERSION = true ? "v0.5.0" : "dev";
+var APP_VERSION = true ? "v0.6.0" : "dev";
 var currency = "USD";
 var translatedText = "";
 var modelLocked = false;
@@ -505,15 +505,15 @@ function calculate() {
     return;
   }
   const input = buildInput(categoryId, base, additional, shippingCostJPY);
-  const normal = ceilings(input, "normal", domesticShipping);
-  const refund = ceilings(input, "refund", domesticShipping);
-  setCeilCell("ceilNormal20", normal[0].maxBid);
-  setCeilCell("ceilNormal15", normal[1].maxBid);
-  setCeilCell("ceilNormal10", normal[2].maxBid);
-  setCeilCell("ceilRefund20", refund[0].maxBid);
-  setCeilCell("ceilRefund15", refund[1].maxBid);
-  setCeilCell("ceilRefund10", refund[2].maxBid);
-  updateVerdict(currentPrice, normal[0].maxBid);
+  const margins = [10, 12, 15, 20];
+  const normal = ceilings(input, "normal", domesticShipping, margins);
+  const refund = ceilings(input, "refund", domesticShipping, margins);
+  const pick = (arr, m) => arr.find((x) => x.margin === m);
+  for (const m of margins) {
+    setCeilCell("ceilNormal" + m, pick(normal, m).maxBid);
+    setCeilCell("ceilRefund" + m, pick(refund, m).maxBid);
+  }
+  updateVerdict(currentPrice, pick(normal, 20).maxBid);
   const r = computeProfit(input);
   renderProfit(r, costPrice);
 }

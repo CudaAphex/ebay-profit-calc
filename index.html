@@ -373,24 +373,24 @@ body::after {
   color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.8px;
   margin-bottom: 8px;
 }
-.ceil-grid { display: flex; gap: 8px; }
+.ceil-grid { display: flex; gap: 5px; }
 .ceil-cell {
-  flex: 1; text-align: center; padding: 10px 6px;
+  flex: 1; text-align: center; padding: 8px 3px; min-width: 0;
   border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--card-bg);
 }
 .ceil-cell.primary {
   border-color: var(--accent); background: var(--accent-soft); box-shadow: var(--shadow);
 }
 .ceil-cell .margin-label {
-  font-size: 10px; font-family: var(--font-display); font-weight: 700;
-  color: var(--text-dim); letter-spacing: 0.5px;
+  font-size: 9px; font-family: var(--font-display); font-weight: 700;
+  color: var(--text-dim); letter-spacing: 0.3px;
 }
 .ceil-cell.primary .margin-label { color: var(--accent); }
 .ceil-cell .ceil-val {
   font-family: var(--font-display); font-weight: 800; line-height: 1.1;
-  margin-top: 3px; font-size: 15px; color: var(--text); letter-spacing: -0.3px;
+  margin-top: 3px; font-size: 13px; color: var(--text); letter-spacing: -0.3px;
 }
-.ceil-cell.primary .ceil-val { font-size: 19px; }
+.ceil-cell.primary .ceil-val { font-size: 15px; }
 .ceil-cell .ceil-val.profit-negative { color: var(--profit-negative); }
 .ceil-divider { height: 1px; background: var(--border); margin: 12px 0; }
 
@@ -538,18 +538,10 @@ body.dark {
   <div class="ceil-block">
     <div class="ceil-basis">通常基準</div>
     <div class="ceil-grid">
-      <div class="ceil-cell primary">
-        <div class="margin-label">利益20%とるなら</div>
-        <div class="ceil-val" id="ceilNormal20">---</div>
-      </div>
-      <div class="ceil-cell">
-        <div class="margin-label">15%とるなら</div>
-        <div class="ceil-val" id="ceilNormal15">---</div>
-      </div>
-      <div class="ceil-cell">
-        <div class="margin-label">10%とるなら</div>
-        <div class="ceil-val" id="ceilNormal10">---</div>
-      </div>
+      <div class="ceil-cell"><div class="margin-label">10%</div><div class="ceil-val" id="ceilNormal10">---</div></div>
+      <div class="ceil-cell"><div class="margin-label">12%</div><div class="ceil-val" id="ceilNormal12">---</div></div>
+      <div class="ceil-cell"><div class="margin-label">15%</div><div class="ceil-val" id="ceilNormal15">---</div></div>
+      <div class="ceil-cell primary"><div class="margin-label">20%</div><div class="ceil-val" id="ceilNormal20">---</div></div>
     </div>
   </div>
 
@@ -558,18 +550,10 @@ body.dark {
   <div class="ceil-block">
     <div class="ceil-basis">還付込み基準</div>
     <div class="ceil-grid">
-      <div class="ceil-cell primary">
-        <div class="margin-label">利益20%とるなら</div>
-        <div class="ceil-val" id="ceilRefund20">---</div>
-      </div>
-      <div class="ceil-cell">
-        <div class="margin-label">15%とるなら</div>
-        <div class="ceil-val" id="ceilRefund15">---</div>
-      </div>
-      <div class="ceil-cell">
-        <div class="margin-label">10%とるなら</div>
-        <div class="ceil-val" id="ceilRefund10">---</div>
-      </div>
+      <div class="ceil-cell"><div class="margin-label">10%</div><div class="ceil-val" id="ceilRefund10">---</div></div>
+      <div class="ceil-cell"><div class="margin-label">12%</div><div class="ceil-val" id="ceilRefund12">---</div></div>
+      <div class="ceil-cell"><div class="margin-label">15%</div><div class="ceil-val" id="ceilRefund15">---</div></div>
+      <div class="ceil-cell primary"><div class="margin-label">20%</div><div class="ceil-val" id="ceilRefund20">---</div></div>
     </div>
   </div>
 </div>
